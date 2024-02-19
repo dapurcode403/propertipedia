@@ -24,7 +24,7 @@ class UserController extends BaseController
                 'User' => $model->where('status', 1)->findAll(),
             ];
             $msg = [
-                'data' => view('User/data', $data),
+                'data' => view('user/data', $data),
             ];
             echo json_encode($msg);
         } else {
