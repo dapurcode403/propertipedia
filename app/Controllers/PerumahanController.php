@@ -13,7 +13,7 @@ class PerumahanController extends BaseController
     {
         $data = [
             'title' => 'Perumahan',
-            'isi' => 'Perumahan/index',
+            'isi' => 'perumahan/index',
         ];
         return view('layout/wrapper', $data);
     }
