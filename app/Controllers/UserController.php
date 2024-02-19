@@ -136,7 +136,7 @@ class UserController extends BaseController
                 'kons' => $kons
             ];
             $msg = [
-                'data' => view('User/modalEdit', $data),
+                'data' => view('user/modalEdit', $data),
             ];
             echo json_encode($msg);
         } else {
