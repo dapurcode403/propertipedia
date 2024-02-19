@@ -12,7 +12,7 @@ class KonsumenController extends BaseController
     {
         $data = [
             'title' => 'Konsumen',
-            'isi' => 'Konsumen/index',
+            'isi' => 'konsumen/index',
         ];
         return view('layout/wrapper', $data);
     }
