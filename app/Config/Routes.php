@@ -19,7 +19,7 @@ $routes->group('dev', static function ($routes) {
     $routes->get('add', 'DeveloperController::add');
     $routes->post('save', 'DeveloperController::save');
     $routes->get('del/(:segment)', 'DeveloperController::delete/$1');
-    $routes->get('edit/(:segment)', 'DeveloperController::edit/$1');
+    $routes->post('edit/(:segment)', 'DeveloperController::edit/$1');
     $routes->post('saveEdit', 'DeveloperController::save_edit');
 });
 
