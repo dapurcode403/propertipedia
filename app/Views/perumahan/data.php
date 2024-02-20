@@ -1,5 +1,5 @@
 <!-- Table with stripped rows -->
-<table class="table table-sm">
+<table class="table table-bordered table-sm table-responsive-md">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -50,8 +50,11 @@ $('.btn-edit').click(function(e) {
         },
         success: function(response) {
             $('.viewmodal').html(response.data).show();
-            const myModal = new bootstrap.Modal('#modalEdit');
-            myModal.show();
+            $('#modalEdit').modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            });
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

@@ -3,11 +3,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTambahLabel">Tambah Data</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <?= form_open('usr/save', ['class' => 'form']); ?>
             <div class="modal-body">
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="nama" name="nama">
@@ -16,7 +18,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="username" class="col-sm-3 col-form-label">Username</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="username" name="username">
@@ -25,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="email" name="email">
@@ -34,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="password" class="col-sm-3 col-form-label">Password</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="password" name="password">
@@ -43,11 +45,11 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="role" class="col-sm-3 col-form-label">Level</label>
                     <div class="col-sm-8">
-                        <select class="form-select" aria-label="Default select example" name="role" id="role">
-                            <option selected="" value="">Pilih Level</option>
+                        <select class="custom-select" aria-label="Default select example" name="role" id="role">
+                            <option value="" style="display: none;" selected disabled>Pilih Level</option>
                             <option value="administrator">Administrator</option>
                             <option value="admin">Admin</option>
                             <option value="marketing">Marketing</option>
@@ -60,7 +62,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary btnSimpan">Simpan</button>
             </div>
             <?= form_close(); ?>

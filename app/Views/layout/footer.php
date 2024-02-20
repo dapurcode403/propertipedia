@@ -1,6 +1,6 @@
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
-    <div class="copyright">
-        &copy; Copyright <strong><span>Dapurcode403</span></strong>. All Rights Reserved
-    </div>
-</footer><!-- End Footer -->
+<!-- To the right -->
+<div class="float-right d-none d-sm-inline">
+    Powered by sigrisa
+</div>
+<!-- Default to the left -->
+<strong>Copyright &copy; <?= date('Y'); ?>.</strong> All rights reserved.

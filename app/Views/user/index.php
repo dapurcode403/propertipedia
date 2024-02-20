@@ -1,24 +1,18 @@
 <div class="col">
-    <div class="card">
+    <div class="card shadow bg-white rounded">
         <div class="card-header">
             <div class="row justify-content-between">
                 <div class="col-4">
                     Master User
                 </div>
-                <div class="col-4">
-                    <button class="btn btn-primary float-end btn-add-usr"><i class="bi bi-plus-lg"></i> Tambah</button>
-                </div>
+                <div class="col-auto"><button class="btn btn-sm btn-primary btn-add-usr">Tambah</button></div>
             </div>
-
         </div>
         <div class="card-body">
-
             <div class="loadData"></div>
-
         </div>
-
-        <div class="viewmodal"></div>
     </div>
+    <div class="viewmodal"></div>
 </div>
 <script>
 loadData();
@@ -57,12 +51,15 @@ $('.btn-add-usr').click(function(e) {
         },
         complete: function() {
             $('.btn-add-usr').removeAttr('disabled');
-            $('.btn-add-usr').html('<i class="bi bi-plus-lg"></i> Tambah');
+            $('.btn-add-usr').html('Tambah');
         },
         success: function(response) {
             $('.viewmodal').html(response.data).show();
-            const myModal = new bootstrap.Modal('#modalTambah');
-            myModal.show();
+            $('#modalTambah').modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            });
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

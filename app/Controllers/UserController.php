@@ -131,9 +131,9 @@ class UserController extends BaseController
     {
         if ($this->request->isAJAX()) {
             $model = new UsersModel();
-            $kons = $model->find($id);
+            $usr = $model->find($id);
             $data = [
-                'kons' => $kons
+                'usr' => $usr
             ];
             $msg = [
                 'data' => view('user/modalEdit', $data),
@@ -157,16 +157,33 @@ class UserController extends BaseController
                     ]
                 ],
 
-                'alamat' => [
-                    'label' => 'Alamat',
+                'username' => [
+                    'label' => 'Username',
                     'rules' => 'required',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
                     ]
                 ],
 
-                'notlp' => [
-                    'label' => 'No Telepon',
+                'email' => [
+                    'label' => 'Email',
+                    'rules' => 'trim|required|valid_email',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                        'valid_email' => '{field} tidak valid',
+                    ]
+                ],
+
+                'password' => [
+                    'label' => 'Password',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong',
+                    ]
+                ],
+
+                'role' => [
+                    'label' => 'Level',
                     'rules' => 'required',
                     'errors' => [
                         'required' => '{field} tidak boleh kosong',
@@ -179,19 +196,21 @@ class UserController extends BaseController
                 $msg = [
                     'error' => [
                         'nama' => $validation->getError('nama'),
-                        'alamat' => $validation->getError('alamat'),
-                        'notlp' => $validation->getError('notlp'),
+                        'username' => $validation->getError('username'),
+                        'email' => $validation->getError('email'),
+                        'password' => $validation->getError('password'),
+                        'role' => $validation->getError('role'),
                     ]
                 ];
                 echo json_encode($msg);
             } else {
                 $id = $this->request->getPost('id');
                 $data = [
-                    'nama' => $this->request->getPost('nama'),
-                    'alamat' => $this->request->getPost('alamat'),
-                    'no_telp' => $this->request->getPost('notlp'),
-                    'keterangan' => $this->request->getPost('keterangan'),
-                    'ins_by' => 1,
+                    'name' => $this->request->getPost('nama'),
+                    'username' => $this->request->getPost('username'),
+                    'email' => $this->request->getPost('email'),
+                    'password' => password_hash($this->request->getvar('password'), PASSWORD_DEFAULT),
+                    'role' => $this->request->getPost('role'),
                     'status' => 1,
                 ];
 
@@ -212,8 +231,8 @@ class UserController extends BaseController
     public function delete($id)
     {
         if ($this->request->isAjax()) {
-            $kons = new UsersModel();
-            $kons->delete($id);
+            $usr = new UsersModel();
+            $usr->delete($id);
         } else {
             exit('Data tidak dapat diproses');
         };

@@ -1,21 +1,17 @@
-<div class="card">
-    <div class="card-header">
-        <div class="row justify-content-between">
-            <div class="col-4">
-                Master Perumahan
-            </div>
-            <div class="col-4">
-                <button class="btn btn-primary float-end btn-add-per"><i class="bi bi-plus-lg"></i> Tambah</button>
+<div class="col">
+    <div class="card shadow bg-white rounded">
+        <div class="card-header">
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    Master Perumahan
+                </div>
+                <div class="col-auto"><button class="btn btn-sm btn-primary btn-add-per">Tambah</button></div>
             </div>
         </div>
-
+        <div class="card-body">
+            <div class="loadData"></div>
+        </div>
     </div>
-    <div class="card-body">
-
-        <div class="loadData"></div>
-
-    </div>
-
     <div class="viewmodal"></div>
 </div>
 
@@ -57,12 +53,15 @@ $('.btn-add-per').click(function(e) {
         },
         complete: function() {
             $('.btn-add-per').removeAttr('disabled');
-            $('.btn-add-per').html('<i class="bi bi-plus-lg"></i> Tambah');
+            $('.btn-add-per').html('Tambah');
         },
         success: function(response) {
             $('.viewmodal').html(response.data).show();
-            const myModal = new bootstrap.Modal('#modalTambah');
-            myModal.show();
+            $('#modalTambah').modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            });
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

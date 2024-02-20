@@ -3,16 +3,18 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTambahLabel">Tambah Data</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <?= form_open('prmh/save', ['class' => 'form']); ?>
             <div class="modal-body">
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="id_dev" class="col-sm-3 col-form-label">Developer</label>
                     <div class="col-sm-8">
-                        <select class="form-select" aria-label="Default select example" name="id_dev" id="id_dev">
-                            <option selected="">Pilih Developer</option>
+                        <select class="custom-select" aria-label="Default select example" name="id_dev" id="id_dev">
+                            <option value="" style="display: none;" selected disabled>Pilih Developer</option>
                             <?php foreach ($developer as $dev) : ?>
                             <option value="<?= $dev['id']; ?>"><?= strtoupper($dev['nama_dev']); ?></option>
                             <?php endforeach; ?>
@@ -20,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="nama_per" class="col-sm-3 col-form-label">Nama Perumahan</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="nama_per" name="nama_per">
@@ -29,7 +31,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="alamat" name="alamat">
@@ -38,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="notlp" class="col-sm-3 col-form-label">No Telepon</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="notlp" name="notlp">
@@ -47,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="lat" class="col-sm-3 col-form-label">Latitude</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="lat" name="lat" placeholder="ex -7.xxxxxx">
@@ -56,7 +58,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="long" class="col-sm-3 col-form-label">Longitude</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="long" name="long" placeholder="ex 109.xxxxxx">
@@ -67,7 +69,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary btnSimpan">Simpan</button>
             </div>
             <?= form_close(); ?>

@@ -3,53 +3,72 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEditLabel">Edit Data</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <?= form_open('kons/saveEdit', ['class' => 'form']); ?>
+            <?= form_open('usr/saveEdit', ['class' => 'form']); ?>
 
-            <input type='hidden' class='form-control' id='id' name='id' value="<?= $kons['id']; ?>">
+            <input type='hidden' class='form-control' id='id' name='id' value="<?= $usr['id']; ?>">
 
             <div class="modal-body">
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $kons['nama']; ?>">
+                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $usr['name']; ?>">
                         <div id="errornama" class="invalid-feedback">
                         </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
+                <div class="form-group row">
+                    <label for="username" class="col-sm-3 col-form-label">Username</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="alamat" name="alamat"
-                            value="<?= $kons['alamat']; ?>">
-                        <div id="erroralamat" class="invalid-feedback">
+                        <input type="text" class="form-control" id="username" name="username"
+                            value="<?= $usr['username']; ?>">
+                        <div id="errorusername" class="invalid-feedback">
                         </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="notlp" class="col-sm-3 col-form-label">No Telepon</label>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="notlp" name="notlp"
-                            value="<?= $kons['no_telp']; ?>">
-                        <div id="errornotlp" class="invalid-feedback">
+                        <input type="text" class="form-control" id="email" name="email" value="<?= $usr['email']; ?>">
+                        <div id="erroremail" class="invalid-feedback">
                         </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-3 col-form-label">Password</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control" name="keterangan" id="keterangan" col="100"
-                            rows="2"><?= $kons['keterangan']; ?></textarea>
+                        <input type="text" class="form-control" id="password" name="password">
+                        <div id="errorpassword" class="invalid-feedback">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="role" class="col-sm-3 col-form-label">Level</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" aria-label="Default select example" name="role" id="role">
+                            <option value="" style="display: none;" selected disabled>Pilih Level</option>
+                            <option value="administrator" <?= ($usr['role'] == "administrator") ? 'selected' : ''; ?>>
+                                Administrator</option>
+                            <option value="admin" <?= ($usr['role'] == 'admin') ? 'selected' : ''; ?>>Admin</option>
+                            <option value="marketing" <?= ($usr['role'] == 'marketing') ? 'selected' : ''; ?>>Marketing
+                            </option>
+                            <option value="sales" <?= ($usr['role'] == 'sales') ? 'selected' : ''; ?>>Sales</option>
+                        </select>
+                        <div id="errorrole" class="invalid-feedback">
+                        </div>
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary btnSimpan">Simpan</button>
             </div>
             <?= form_close(); ?>
@@ -85,20 +104,36 @@ $(document).ready(function() {
                         $('#errornama').html('');
                     };
 
-                    if (response.error.alamat) {
-                        $('#alamat').addClass('is-invalid');
-                        $('#erroralamat').html(response.error.alamat);
+                    if (response.error.username) {
+                        $('#username').addClass('is-invalid');
+                        $('#errorusername').html(response.error.username);
                     } else {
-                        $('#alamat').removeClass('is-invalid');
-                        $('#erroralamat').html('');
+                        $('#username').removeClass('is-invalid');
+                        $('#errorusername').html('');
                     };
 
-                    if (response.error.notlp) {
-                        $('#notlp').addClass('is-invalid');
-                        $('#errornotlp').html(response.error.notlp);
+                    if (response.error.email) {
+                        $('#email').addClass('is-invalid');
+                        $('#erroremail').html(response.error.email);
                     } else {
-                        $('#notlp').removeClass('is-invalid');
-                        $('#errornotlp').html('');
+                        $('#email').removeClass('is-invalid');
+                        $('#erroremail').html('');
+                    };
+
+                    if (response.error.password) {
+                        $('#password').addClass('is-invalid');
+                        $('#errorpassword').html(response.error.password);
+                    } else {
+                        $('#password').removeClass('is-invalid');
+                        $('#errorpassword').html('');
+                    };
+
+                    if (response.error.role) {
+                        $('#role').addClass('is-invalid');
+                        $('#errorrole').html(response.error.role);
+                    } else {
+                        $('#role').removeClass('is-invalid');
+                        $('#errorrole').html('');
                     };
 
                 } else {

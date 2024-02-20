@@ -21,11 +21,13 @@
              <td><?= $value['username']; ?></td>
              <td><?= $value['email']; ?></td>
              <td><?= $value['password']; ?></td>
-             <td class="text-center"><button class="btn btn-sm btn-success btn-edit" data-id="<?= $value['id']; ?>"
+             <td class="text-center">
+                 <button class="btn btn-sm btn-success btn-edit" data-id="<?= $value['id']; ?>"
                      id="btn-edit<?= $value['id']; ?>">Edit</button> | <button class="btn btn-sm btn-danger btn-delete"
                      data-id="<?= $value['id']; ?>" id="btn-delete<?= $value['id']; ?>">Delete</button> | <button
                      class="btn btn-sm btn-info btn-reset" data-id="<?= $value['id']; ?>"
-                     id="btn-reset<?= $value['id']; ?>">Reset Pwd</button></td>
+                     id="btn-reset<?= $value['id']; ?>">Reset Pwd</button>
+             </td>
          </tr>
          <?php endforeach; ?>
 
@@ -50,8 +52,11 @@ $('.btn-edit').click(function(e) {
         },
         success: function(response) {
             $('.viewmodal').html(response.data).show();
-            const myModal = new bootstrap.Modal('#modalEdit');
-            myModal.show();
+            $('#modalEdit').modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            });
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

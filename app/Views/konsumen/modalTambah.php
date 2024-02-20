@@ -3,11 +3,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTambahLabel">Tambah Data</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <?= form_open('kons/save', ['class' => 'form']); ?>
             <div class="modal-body">
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="nama" name="nama">
@@ -16,7 +18,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="alamat" name="alamat">
@@ -25,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="notlp" class="col-sm-3 col-form-label">No Telepon</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="notlp" name="notlp">
@@ -34,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="form-group row">
                     <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
                     <div class="col-sm-8">
                         <textarea class="form-control" name="keterangan" id="keterangan" col="100" rows="2"></textarea>
@@ -43,7 +45,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 <button type="submit" class="btn btn-primary btnSimpan">Simpan</button>
             </div>
             <?= form_close(); ?>
