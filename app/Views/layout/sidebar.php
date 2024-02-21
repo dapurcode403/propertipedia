@@ -37,20 +37,21 @@ $segment = $path[1];
                 </p>
             </a>
         </li>
+
         <li class="nav-item">
-            <a href="<?= base_url('usr'); ?>" class="nav-link <?= ($segment == 'usr') ? 'active' : ''; ?>">
-                <ion-icon class="nav-icon" name="person-outline"></ion-icon>
+            <a href="<?= base_url('unt_scnd'); ?>" class="nav-link <?= ($segment == 'unt_scnd') ? 'active' : ''; ?>">
+                <ion-icon class="nav-icon" name="home-outline"></ion-icon>
                 <p>
-                    User
+                    Unit Second
                 </p>
             </a>
         </li>
 
         <li class="nav-item">
-            <a href="<?= base_url('unt_scnd'); ?>" class="nav-link <?= ($segment == 'unt_scnd') ? 'active' : ''; ?>">
+            <a href="<?= base_url('usr'); ?>" class="nav-link <?= ($segment == 'usr') ? 'active' : ''; ?>">
                 <ion-icon class="nav-icon" name="person-outline"></ion-icon>
                 <p>
-                    Unit Second
+                    User
                 </p>
             </a>
         </li>
