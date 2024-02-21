@@ -45,6 +45,15 @@ $segment = $path[1];
                 </p>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="<?= base_url('unt_scnd'); ?>" class="nav-link <?= ($segment == 'unt_scnd') ? 'active' : ''; ?>">
+                <ion-icon class="nav-icon" name="person-outline"></ion-icon>
+                <p>
+                    Unit Second
+                </p>
+            </a>
+        </li>
         <!-- <li class="nav-item">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
