@@ -8,6 +8,9 @@ use CodeIgniter\Router\RouteCollection;
 
 // $routes->get('developer', 'DeveloperController::index');
 
+$routes->get('api/unitbekas', 'Api\CApiUnitBekas::index');
+$routes->post('api/unitbekas', 'Api\CApiUnitBekas::create');
+
 $routes->get('/', 'Dashboard::index');
 $routes->add('/login', 'Auth::login');
 $routes->add('/logout', 'Auth::logout');
