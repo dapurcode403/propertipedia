@@ -32,4 +32,16 @@ class UnitBekasController extends BaseController
             exit('Data tidak dapat diproses');
         };
     }
+
+    public function add()
+    {
+        if ($this->request->isAJAX()) {
+            $msg = [
+                'data' => view('unit_bekas/modalTambah'),
+            ];
+            echo json_encode($msg);
+        } else {
+            exit('Data tidak dapat diproses');
+        }
+    }
 }
