@@ -21,7 +21,8 @@ class CApiUnitBekas extends ResourceController
         $model = new UnitBekasModel();
         $data = [
             'message' => 'success',
-            'data_unit' => $model->findAll(),
+            'data_unit' => $model->orderBy('id', 'DESC')->findAll(),
+            // 'data_unit' => $model->findAll(),
         ];
         return $this->respond($data, 200);
     }
@@ -59,6 +60,7 @@ class CApiUnitBekas extends ResourceController
             'nama_kontak' => esc($this->request->getVar('nama_kontak')),
             'no_wa' => esc($this->request->getVar('no_wa')),
             'alamat' => esc($this->request->getVar('alamat')),
+            'catatan' => esc($this->request->getVar('catatan')),
             'longitude' => esc($this->request->getVar('longitude')),
             'latitude' => esc($this->request->getVar('latitude')),
             'ins_by' => esc($this->request->getVar('ins_by')),
