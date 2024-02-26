@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open_multipart('aktivitasdaniklan/saveAktivitas', ['class' => 'form']); ?>
+            <?= form_open_multipart('unt_scnd/saveAktivitas', ['class' => 'form']); ?>
             <div class="modal-body">
 
                 <div class="form-group row">

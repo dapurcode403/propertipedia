@@ -45,16 +45,16 @@
             url: "<?= base_url(); ?>unt_scnd/add",
             dataType: "json",
             beforeSend: function() {
-                $('.btn-tambah-aktivitas').attr('disabled', 'disabled');
-                $('.btn-tambah-aktivitas').html('<i class="fa fa-spin fa-spinner"></i> loading...');
+                $('.btn-add-unit').attr('disabled', 'disabled');
+                $('.btn-add-unit').html('<i class="fa fa-spin fa-spinner"></i> loading...');
             },
             complete: function() {
-                $('.btn-tambah-aktivitas').removeAttr('disabled');
-                $('.btn-tambah-aktivitas').html('Tambah');
+                $('.btn-add-unit').removeAttr('disabled');
+                $('.btn-add-unit').html('Tambah');
             },
             success: function(response) {
                 $('.viewmodal').html(response.data).show();
-                $('#modalAktivitas').modal({
+                $('#modalTambah').modal({
                     backdrop: 'static',
                     keyboard: true,
                     show: true
