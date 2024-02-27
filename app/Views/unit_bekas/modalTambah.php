@@ -98,6 +98,8 @@
 
 <script>
     $(document).ready(function() {
+        findMyCoordinates();
+
         $(function() {
             $('.tanggal').daterangepicker({
                 singleDatePicker: true,
@@ -166,8 +168,6 @@
 </script>
 
 <script>
-    findMyCoordinates();
-
     function findMyCoordinates() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
