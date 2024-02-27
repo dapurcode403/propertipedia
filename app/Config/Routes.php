@@ -62,6 +62,9 @@ $routes->group('unt_scnd', static function ($routes) {
     $routes->post('data', 'UnitBekasController::listData');
     $routes->get('add', 'UnitBekasController::add');
     $routes->post('save', 'UnitBekasController::save');
+    $routes->post('fotoUnit', 'UnitBekasController::showFoto');
+
+
     $routes->get('del/(:segment)', 'UnitBekasController::delete/$1');
     $routes->get('edit/(:segment)', 'UnitBekasController::edit/$1');
     $routes->post('saveEdit', 'UnitBekasController::save_edit');

@@ -18,7 +18,11 @@
             foreach ($un_b as $key => $value) : ?>
          <tr>
              <th scope="row"><?= $no++; ?></th>
-             <td><?= $value['foto']; ?></td>
+             <td>
+                 <a href="" class="foto_unit" data-gambar="<?= ($value['foto'] == '') ? '' : $value['foto'] ?>">
+                     <?= fotoSmall($value['foto']); ?>
+                 </a>
+             </td>
              <td><?= $value['nama_kontak']; ?></td>
              <td><?= $value['no_wa']; ?></td>
              <td><?= $value['alamat']; ?></td>
@@ -109,4 +113,32 @@ $('.btn-delete').click(function(e) {
         }
     })
 })
+ </script>
+
+ <script>
+$('.foto_unit').click(function(e) {
+    e.preventDefault();
+    const gambar = $(this).data('gambar');
+    // alert(gambar);
+    $.ajax({
+        type: "post",
+        url: "<?= base_url(); ?>unt_scnd/fotoUnit",
+        data: {
+            <?= csrf_token() ?>: "<?= csrf_hash() ?>",
+            gambar: gambar,
+        },
+        dataType: "json",
+        success: function(response) {
+            $('.viewmodal').html(response.data).show();
+            $('#modalfoto').modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            });
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
+    });
+});
  </script>

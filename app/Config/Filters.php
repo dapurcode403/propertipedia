@@ -41,7 +41,7 @@ class Filters extends BaseConfig
             'auth_filter' => ['except' => ['/login', '/authlogin', '/Api/*']],
             // 'honeypot',
             'cors',
-            'csrf' => ['except' => ['/Api/*']],
+            'csrf' => ['except' => ['/Api/*', '/unt_scnd/save']],
             // 'invalidchars',
         ],
         'after' => [

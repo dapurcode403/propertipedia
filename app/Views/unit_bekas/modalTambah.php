@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open_multipart('unt_scnd/saveAktivitas', ['class' => 'form']); ?>
+            <?= form_open_multipart('unt_scnd/save', ['class' => 'form']); ?>
             <div class="modal-body">
 
                 <div class="form-group row">
@@ -56,23 +56,55 @@
                     </div>
                     <input type="hidden" name="imagecam" id="imagecam" class="image-tag">
                 </div>
-                <div id="map_location"></div>
-                <div id="lat"></div>
-                <div id="long"></div>
 
                 <div class="form-group row">
-                    <label for="aktivitas" class="col-sm-3 col-form-label">Aktivitas</label>
+                    <label for="map" class="col-sm-3 col-form-label">MAP</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control" id="keterangan" name="keterangan" rows="4" required
-                            oninvalid="this.setCustomValidity('Keterangan tidak boleh kosong');"
-                            onchange="try{setCustomValidity('')}catch(e){};"
-                            x-moz-errormessage="Keterangan tidak boleh kosong"></textarea>
-                        <div id="errorketerangan" class="invalid-feedback">
+                        <div id="map_location"></div>
+                    </div>
+                </div>
+                <input type="hidden" class="form-control" id="lat" name="lat">
+                <input type="hidden" class="form-control" id="long" name="long">
+
+                <div class="form-group row">
+                    <label for="namakontak" class="col-sm-3 col-form-label">Nama Kontak</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="nama_kontak" name="nama_kontak">
+                        <div id="errornama_kontak" class="invalid-feedback">
                         </div>
                     </div>
                 </div>
 
+                <div class="form-group row">
+                    <label for="no_wa" class="col-sm-3 col-form-label">No Telp</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="no_wa" name="no_wa">
+                        <div id="errorno_wa" class="invalid-feedback">
+                        </div>
+                    </div>
+                </div>
 
+                <div class="form-group row">
+                    <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="alamat" name="alamat" rows="4" required
+                            oninvalid="this.setCustomValidity('Alamat tidak boleh kosong');"
+                            onchange="try{setCustomValidity('')}catch(e){};"
+                            x-moz-errormessage="Alamat tidak boleh kosong"></textarea>
+                        <div id="erroralamat" class="invalid-feedback">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="catatan" class="col-sm-3 col-form-label">Catatan</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="catatan" name="catatan" rows="4"></textarea>
+                        <div id="errorcatatan" class="invalid-feedback">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hasilnya"></div>
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btnSimpan">Simpan</button>
@@ -100,7 +132,7 @@ Webcam.attach('.my_camera');
 function take_picture() {
     Webcam.snap(function(data_uri) {
         $(".image-tag").val(data_uri);
-        document.getElementById('result').innerHTML = '<img width=80 height=80 src="' + data_uri + '"/>';
+        document.getElementById('result').innerHTML = '<img  src="' + data_uri + '"/>';
     })
 }
 </script>
@@ -129,17 +161,25 @@ $(document).ready(function() {
 
         let form = $('.form')[0];
         let data = new FormData(form);
+        data.append('tglAktivitas', $('#tglAktivitas').val());
+        data.append('lat', $('#lat').val());
+        data.append('long', $('#long').val());
+        data.append('nama_kontak', $('#nama_kontak').val());
+        data.append('no_wa', $('#no_wa').val());
+        data.append('alamat', $('#alamat').val());
+        data.append('catatan', $('#catatan').val());
+
 
         if ($('#imagecam').val() === '') {
             Swal.fire({
-                title: "Kamu belum foto aktivitas",
-                text: "Foto dulu ya... 😉",
+                title: "Warning...",
+                text: "Gambar foto belum tersedia",
             });
         } else {
             $.ajax({
                 type: "post",
                 url: $(this).attr('action'),
-                // data: $(this).serialize(),
+                // data:  $(this).serialize(),
                 data: data,
                 enctype: 'multipart/form-data',
                 processData: false,
@@ -162,7 +202,7 @@ $(document).ready(function() {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    loadDataAktivitas();
+                    loadData();
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
@@ -178,6 +218,8 @@ $(document).ready(function() {
 
 <script>
 function findMyCoordinates() {
+
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -185,8 +227,14 @@ function findMyCoordinates() {
                 $('#map_location').html('<iframe width="100%" height="200" src="https://maps.google.com/maps?q=' +
                     position.coords.latitude + ',' + position.coords.longitude + '&output=embed"></iframe>');
 
-                $('#lat').html('<label>Lat :' + position.coords.latitude + '</label>');
-                $('#long').html('<label>Long :' + position.coords.longitude + '</label>');
+                $('#lat').val(position.coords.latitude);
+                $('#long').val(position.coords.longitude);
+
+                const bdcAPI =
+                    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`;
+
+                getAPI(bdcAPI);
+
             },
             (error) => {
                 alert(error.message);
@@ -194,6 +242,24 @@ function findMyCoordinates() {
         );
     } else {
         alert('Geolocation is not available');
+    }
+}
+
+function getAPI(bdcApi) {
+    const http = new XMLHttpRequest();
+    http.open('Get', bdcApi)
+    http.send()
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var myArray = JSON.parse(this.responseText);
+            var kota = myArray['city'];
+            var kecamatan = myArray['locality'];
+            var kabupaten = myArray['localityInfo']['administrative'][3]['name'];
+            var propinsi = myArray['principalSubdivision'];
+            var negara = myArray['countryName'];
+            $('#alamat').val(
+                kota + ', ' + kecamatan + ', Kabupaten' + kabupaten + ', ' + propinsi + ', ' + negara);
+        }
     }
 }
 </script>

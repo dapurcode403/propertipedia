@@ -15,54 +15,55 @@
     <div class="viewmodal"></div>
 </div>
 <script>
-    loadData();
+loadData();
 
-    function loadData() {
-        $.ajax({
-            method: 'POST',
-            url: "<?= base_url(); ?>unt_scnd/data",
-            data: {
-                <?= csrf_token() ?>: "<?= csrf_hash() ?>",
-            },
-            dataType: "json",
-            beforeSend: function() {
-                $('.loadData').html(
-                    ' <div class="text-center"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</div>'
-                );
-            },
-            success: function(response) {
-                $('.loadData').html(response.data);
-            }
-        });
-    }
+function loadData() {
+    $.ajax({
+        method: 'POST',
+        url: "<?= base_url(); ?>unt_scnd/data",
+        data: {
+            <?= csrf_token() ?>: "<?= csrf_hash() ?>",
+        },
+        dataType: "json",
+        beforeSend: function() {
+            $('.loadData').html(
+                ' <div class="text-center"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...</div>'
+            );
+        },
+        success: function(response) {
+
+            $('.loadData').html(response.data);
+        }
+    });
+}
 </script>
 
 
 <script>
-    $('.btn-add-unit').click(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: "<?= base_url(); ?>unt_scnd/add",
-            dataType: "json",
-            beforeSend: function() {
-                $('.btn-add-unit').attr('disabled', 'disabled');
-                $('.btn-add-unit').html('<i class="fa fa-spin fa-spinner"></i> loading...');
-            },
-            complete: function() {
-                $('.btn-add-unit').removeAttr('disabled');
-                $('.btn-add-unit').html('Tambah');
-            },
-            success: function(response) {
-                $('.viewmodal').html(response.data).show();
-                $('#modalTambah').modal({
-                    backdrop: 'static',
-                    keyboard: true,
-                    show: true
-                });
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-            }
-        });
+$('.btn-add-unit').click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: "<?= base_url(); ?>unt_scnd/add",
+        dataType: "json",
+        beforeSend: function() {
+            $('.btn-add-unit').attr('disabled', 'disabled');
+            $('.btn-add-unit').html('<i class="fa fa-spin fa-spinner"></i> loading...');
+        },
+        complete: function() {
+            $('.btn-add-unit').removeAttr('disabled');
+            $('.btn-add-unit').html('Tambah');
+        },
+        success: function(response) {
+            $('.viewmodal').html(response.data).show();
+            $('#modalTambah').modal({
+                backdrop: 'static',
+                keyboard: true,
+                show: true
+            });
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        }
     });
+});
 </script>
