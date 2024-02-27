@@ -34,7 +34,7 @@ function tglIndoToSystem($tgl)
 function fotoSmall($foto)
 {
     if ($foto != '') {
-        $label = "<img src='" .  base_url() . "/assets/img/scnd_unit/" . $foto . "' width='40px;'  class='img-responsive'>";
+        $label = "<img src='" .  base_url() . "assets/img/scnd_unit/" . $foto . "' width='40px;'  class='img-responsive'>";
     } else {
         $label = "";
     }

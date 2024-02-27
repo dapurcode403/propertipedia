@@ -62,7 +62,7 @@ class UnitBekasController extends BaseController
                 $image = str_replace('data:image/jpeg;base64,', '', $image);
                 $image = base64_decode($image, true);
                 $filename = session('id') . '-' . date('YmdHis') . '.' . 'jpg';
-                file_put_contents(FCPATH . 'public/assets/img/scnd_unit/' . $filename, $image);
+                file_put_contents(FCPATH . 'assets/img/scnd_unit/' . $filename, $image);
             } else {
                 $filename = '';
             }

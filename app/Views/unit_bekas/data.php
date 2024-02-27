@@ -26,13 +26,13 @@
              <td><?= $value['nama_kontak']; ?></td>
              <td><?= $value['no_wa']; ?></td>
              <td><?= $value['alamat']; ?></td>
-             <td><?= $value['longitude'] . ' - ' . $value['latitude']; ?></td>
-             <td><?= $value['ins_by']; ?></td>
+             <td><?= $value['latitude'] . ' - ' . $value['longitude']; ?></td>
+             <td><?= getUserName($value['ins_by']); ?></td>
              <td><?= $value['status']; ?></td>
              <td class="text-center">
-                 <button class="btn btn-sm btn-success btn-edit" data-id="<?= $value['id']; ?>"
+                 <!-- <button class="btn btn-sm btn-success btn-edit" data-id="<?= $value['id']; ?>"
                      id="btn-edit<?= $value['id']; ?>">Edit</button> | <button class="btn btn-sm btn-danger btn-delete"
-                     data-id="<?= $value['id']; ?>" id="btn-delete<?= $value['id']; ?>">Delete</button>
+                     data-id="<?= $value['id']; ?>" id="btn-delete<?= $value['id']; ?>">Delete</button> -->
              </td>
          </tr>
          <?php endforeach; ?>
