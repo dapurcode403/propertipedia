@@ -86,7 +86,7 @@ class UnitBekasController extends BaseController
             $model->insert($data);
 
             $msg = [
-                'success' => $data,
+                'success' => "Data berhasil disimpan",
             ];
             echo json_encode($msg);
         } else {
