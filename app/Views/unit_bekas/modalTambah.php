@@ -29,6 +29,15 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="map" class="col-sm-3 col-form-label">MAP</label>
+                    <div class="col-sm-8">
+                        <div id="map_location"></div>
+                    </div>
+                </div>
+                <input type="hidden" class="form-control" id="lat" name="lat">
+                <input type="hidden" class="form-control" id="long" name="long">
+
+                <div class="form-group row">
                     <label for="aktivitas" class="col-sm-3 col-form-label">Picture</label>
                     <div class="col-sm-8">
                         <style>
@@ -57,14 +66,7 @@
                     <input type="hidden" name="imagecam" id="imagecam" class="image-tag">
                 </div>
 
-                <div class="form-group row">
-                    <label for="map" class="col-sm-3 col-form-label">MAP</label>
-                    <div class="col-sm-8">
-                        <div id="map_location"></div>
-                    </div>
-                </div>
-                <input type="hidden" class="form-control" id="lat" name="lat">
-                <input type="hidden" class="form-control" id="long" name="long">
+
 
                 <div class="form-group row">
                     <label for="namakontak" class="col-sm-3 col-form-label">Nama Kontak</label>
