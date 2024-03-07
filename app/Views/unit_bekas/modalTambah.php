@@ -18,10 +18,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                             </div>
-                            <input type="text" class="form-control float-right tanggal" id="tglAktivitas2"
-                                name="tglAktivitas2" disabled>
-                            <input type="hidden" class="form-control float-right tanggal" id="tglAktivitas"
-                                name="tglAktivitas">
+                            <input type="text" class="form-control float-right tanggal" id="tglAktivitas2" name="tglAktivitas2" disabled>
+                            <input type="hidden" class="form-control float-right tanggal" id="tglAktivitas" name="tglAktivitas">
                             <div id="errortglFollowup" class="invalid-feedback">
                             </div>
                         </div>
@@ -41,18 +39,17 @@
                     <label for="aktivitas" class="col-sm-3 col-form-label">Picture</label>
                     <div class="col-sm-8">
                         <style>
-                        .my_camera,
-                        .my_camera video {
-                            display: inline-block;
-                            width: 100% !important;
-                            margin: auto;
-                            height: auto !important;
-                            border-radius: 15px;
-                        }
+                            .my_camera,
+                            .my_camera video {
+                                display: inline-block;
+                                width: 100% !important;
+                                margin: auto;
+                                height: auto !important;
+                                border-radius: 15px;
+                            }
                         </style>
                         <div class="my_camera"></div>
-                        <button type="button" class="btn btn-success btn-block btn-flat" onclick="take_picture();"><i
-                                class="fas fa-camera-retro">
+                        <button type="button" class="btn btn-success btn-block btn-flat" onclick="take_picture();"><i class="fas fa-camera-retro">
                                 Take
                                 Foto</i></button>
                     </div>
@@ -89,10 +86,7 @@
                 <div class="form-group row">
                     <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control" id="alamat" name="alamat" rows="4" required
-                            oninvalid="this.setCustomValidity('Alamat tidak boleh kosong');"
-                            onchange="try{setCustomValidity('')}catch(e){};"
-                            x-moz-errormessage="Alamat tidak boleh kosong"></textarea>
+                        <textarea class="form-control" id="alamat" name="alamat" rows="4" required oninvalid="this.setCustomValidity('Alamat tidak boleh kosong');" onchange="try{setCustomValidity('')}catch(e){};" x-moz-errormessage="Alamat tidak boleh kosong"></textarea>
                         <div id="erroralamat" class="invalid-feedback">
                         </div>
                     </div>
@@ -121,147 +115,150 @@
     </div>
 </div>
 <script>
-Webcam.set({
-    width: 240,
-    height: 320,
-    dest_width: 240,
-    dest_height: 320,
-    image_format: 'jpeg',
-    jpeg_quality: 90,
-});
-Webcam.attach('.my_camera');
-
-function take_picture() {
-    Webcam.snap(function(data_uri) {
-        $(".image-tag").val(data_uri);
-        document.getElementById('result').innerHTML = '<img  src="' + data_uri + '"/>';
-    })
-}
-</script>
-
-<script>
-$(document).ready(function() {
-    findMyCoordinates();
-
-    $(function() {
-        $('.tanggal').daterangepicker({
-            singleDatePicker: true,
-            autoApply: true,
-            readOnly: true,
-            locale: {
-                format: 'DD-MM-YYYY'
-            }
-        });
+    Webcam.set({
+        width: 240,
+        height: 320,
+        dest_width: 240,
+        dest_height: 320,
+        image_format: 'jpeg',
+        jpeg_quality: 90,
     });
-});
+    Webcam.attach('.my_camera');
+
+    function take_picture() {
+        Webcam.snap(function(data_uri) {
+            $(".image-tag").val(data_uri);
+            document.getElementById('result').innerHTML = '<img  src="' + data_uri + '"/>';
+        })
+    }
 </script>
 
 <script>
-$(document).ready(function() {
-    $('.form').submit(function(e) {
-        e.preventDefault();
+    $(document).ready(function() {
+        findMyCoordinates();
+        setInterval(() => {
+            findMyCoordinates();
+        }, 3000);
 
-        let form = $('.form')[0];
-        let data = new FormData(form);
-        data.append('tglAktivitas', $('#tglAktivitas').val());
-        data.append('lat', $('#lat').val());
-        data.append('long', $('#long').val());
-        data.append('nama_kontak', $('#nama_kontak').val());
-        data.append('no_wa', $('#no_wa').val());
-        data.append('alamat', $('#alamat').val());
-        data.append('catatan', $('#catatan').val());
-
-
-        if ($('#imagecam').val() === '') {
-            Swal.fire({
-                title: "Warning...",
-                text: "Gambar foto belum tersedia",
-            });
-        } else {
-            $.ajax({
-                type: "post",
-                url: $(this).attr('action'),
-                // data:  $(this).serialize(),
-                data: data,
-                enctype: 'multipart/form-data',
-                processData: false,
-                contentType: false,
-                cache: false,
-                dataType: "json",
-                beforeSend: function() {
-                    $('.btnSimpan').attr('disabled', 'disabled');
-                    $('.btnSimpan').html('<i class="fa fa-spin fa-spinner"></i> simpan...');
-                },
-                complete: function() {
-                    $('.btnSimpan').removeAttr('disabled');
-                    $('.btnSimpan').html('Simpan');
-                },
-                success: function(response) {
-                    $('#modalTambah').modal('hide');
-                    Swal.fire({
-                        icon: 'success',
-                        title: response.success,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    loadData();
-                },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+        $(function() {
+            $('.tanggal').daterangepicker({
+                singleDatePicker: true,
+                autoApply: true,
+                readOnly: true,
+                locale: {
+                    format: 'DD-MM-YYYY'
                 }
             });
-            return false;
-        }
-
-
+        });
     });
-});
 </script>
 
 <script>
-function findMyCoordinates() {
+    $(document).ready(function() {
+        $('.form').submit(function(e) {
+            e.preventDefault();
+
+            let form = $('.form')[0];
+            let data = new FormData(form);
+            data.append('tglAktivitas', $('#tglAktivitas').val());
+            data.append('lat', $('#lat').val());
+            data.append('long', $('#long').val());
+            data.append('nama_kontak', $('#nama_kontak').val());
+            data.append('no_wa', $('#no_wa').val());
+            data.append('alamat', $('#alamat').val());
+            data.append('catatan', $('#catatan').val());
 
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                console.log(position.coords.latitude, position.coords.longitude);
-                $('#map_location').html('<iframe width="100%" height="200" src="https://maps.google.com/maps?q=' +
-                    position.coords.latitude + ',' + position.coords.longitude + '&output=embed"></iframe>');
-
-                $('#lat').val(position.coords.latitude);
-                $('#long').val(position.coords.longitude);
-
-                const bdcAPI =
-                    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`;
-
-                getAPI(bdcAPI);
-
-            },
-            (error) => {
-                alert(error.message);
+            if ($('#imagecam').val() === '') {
+                Swal.fire({
+                    title: "Warning...",
+                    text: "Gambar foto belum tersedia",
+                });
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: $(this).attr('action'),
+                    // data:  $(this).serialize(),
+                    data: data,
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    dataType: "json",
+                    beforeSend: function() {
+                        $('.btnSimpan').attr('disabled', 'disabled');
+                        $('.btnSimpan').html('<i class="fa fa-spin fa-spinner"></i> simpan...');
+                    },
+                    complete: function() {
+                        $('.btnSimpan').removeAttr('disabled');
+                        $('.btnSimpan').html('Simpan');
+                    },
+                    success: function(response) {
+                        $('#modalTambah').modal('hide');
+                        Swal.fire({
+                            icon: 'success',
+                            title: response.success,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        loadData();
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    }
+                });
+                return false;
             }
-        );
-    } else {
-        alert('Geolocation is not available');
-    }
-}
 
-function getAPI(bdcApi) {
-    const http = new XMLHttpRequest();
-    http.open('Get', bdcApi)
-    http.send()
-    http.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myArray = JSON.parse(this.responseText);
-            var kota = myArray['city'];
-            var kecamatan = myArray['locality'];
-            var kabupaten = myArray['localityInfo']['administrative'][3]['name'];
-            var propinsi = myArray['principalSubdivision'];
-            var negara = myArray['countryName'];
-            $('#alamat').val(
-                kota + ', ' + kecamatan + ', Kabupaten' + kabupaten + ', ' + propinsi + ', ' + negara);
+
+        });
+    });
+</script>
+
+<script>
+    function findMyCoordinates() {
+
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    console.log(position.coords.latitude, position.coords.longitude);
+                    $('#map_location').html('<iframe width="100%" height="200" src="https://maps.google.com/maps?q=' +
+                        position.coords.latitude + ',' + position.coords.longitude + '&output=embed"></iframe>');
+
+                    $('#lat').val(position.coords.latitude);
+                    $('#long').val(position.coords.longitude);
+
+                    const bdcAPI =
+                        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`;
+
+                    getAPI(bdcAPI);
+
+                },
+                (error) => {
+                    alert(error.message);
+                }
+            );
+        } else {
+            alert('Geolocation is not available');
         }
     }
-}
+
+    function getAPI(bdcApi) {
+        const http = new XMLHttpRequest();
+        http.open('Get', bdcApi)
+        http.send()
+        http.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var myArray = JSON.parse(this.responseText);
+                var kota = myArray['city'];
+                var kecamatan = myArray['locality'];
+                var kabupaten = myArray['localityInfo']['administrative'][3]['name'];
+                var propinsi = myArray['principalSubdivision'];
+                var negara = myArray['countryName'];
+                $('#alamat').val(
+                    kota + ', ' + kecamatan + ', Kabupaten' + kabupaten + ', ' + propinsi + ', ' + negara);
+            }
+        }
+    }
 </script>
