@@ -135,10 +135,10 @@
 
 <script>
     $(document).ready(function() {
-        findMyCoordinates();
-        setInterval(() => {
-            findMyCoordinates();
-        }, 3000);
+        // findMyCoordinates();
+        // setInterval(() => {
+        //     findMyCoordinates();
+        // }, 3000);
 
         $(function() {
             $('.tanggal').daterangepicker({
@@ -216,6 +216,8 @@
 </script>
 
 <script>
+    findMyCoordinates();
+
     function findMyCoordinates() {
 
 
