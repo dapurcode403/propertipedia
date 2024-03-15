@@ -115,6 +115,20 @@
     </div>
 </div>
 <script>
+    async function startCamera() {
+        var stream = null;
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: false
+            })
+        } catch (error) {
+            alert(error);
+            return
+        }
+        $('.my_camera').srcObject = stream;
+    }
+
     Webcam.set({
         width: 240,
         height: 320,

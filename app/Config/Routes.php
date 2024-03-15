@@ -70,3 +70,7 @@ $routes->group('unt_scnd', static function ($routes) {
     $routes->post('saveEdit', 'UnitBekasController::save_edit');
     $routes->get('reset/(:segment)/(:segment)', 'UnitBekasController::reset/$1/$2');
 });
+
+$routes->group('maps', static function ($routes) {
+    $routes->get('/', 'MapsController::index');
+});

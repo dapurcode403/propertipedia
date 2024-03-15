@@ -56,6 +56,16 @@ $segment = $path[1];
             </a>
         </li>
 
+        <li class="nav-header">##########################</li>
+
+        <li class="nav-item">
+            <a href="<?= base_url('maps'); ?>" class="nav-link <?= ($segment == 'maps') ? 'active' : ''; ?>">
+                <ion-icon class="nav-icon" name="map"></ion-icon>
+                <p>
+                    Map
+                </p>
+            </a>
+        </li>
 
         <!-- <li class="nav-item">
             <a href="#" class="nav-link ">
