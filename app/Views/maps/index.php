@@ -7,10 +7,10 @@ $rumahtojson = json_encode($rumah);
 
 <script>
 const map = L.map('map').setView([-7.424377192578975, 109.23018305426238], 12);
-
+$('.leaflet-control-attribution').hide();
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attributionControl: false
 }).addTo(map);
 
 // marker
